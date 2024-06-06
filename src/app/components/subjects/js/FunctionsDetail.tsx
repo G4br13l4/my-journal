@@ -9,7 +9,7 @@ import ListItem from '@mui/joy/ListItem';
 import IconButton from '@mui/joy/IconButton';
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { Highlight, themes } from 'prism-react-renderer';
-import { arrowFunctionExample, functionAsArgumentExample, functionInVariableExample, functionWithArgumentExample, normalDeclarationExample, syntaxExample } from './functionsDetailExamples.util';
+import { arrowFunctionExample, functionAsArgumentExample, functionInVariableExample, functionWithArgumentExample, normalDeclarationExample, syntaxExample, arrowFunctionLikeExpressionExample, multilineArrowFunctionExample, arrowFunctionInClassExample, arrowFunctionInVariableExample, callFunctionBeforeInitializationExample } from './functionsDetailExamples.util';
 
 const FunctionsDetail: FunctionComponent = () => {
   const [open, setOpen] = React.useState(false);
@@ -18,6 +18,10 @@ const FunctionsDetail: FunctionComponent = () => {
   const [open4, setOpen4] = React.useState(false);
   const [open5, setOpen5] = React.useState(false);
   const [open6, setOpen6] = React.useState(false);
+  const [open7, setOpen7] = React.useState(false);
+  const [open8, setOpen8] = React.useState(false);
+  const [open9, setOpen9] = React.useState(false);
+  const [open10, setOpen10] = React.useState(false);
 
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -467,6 +471,294 @@ const FunctionsDetail: FunctionComponent = () => {
         </ul>
       </Box>
       <Divider variant="middle" />
+      <Box sx={{ my: 4, mx: 2 }}>
+        <Typography gutterBottom variant="h4" component="div">
+          Arrow Functions
+        </Typography>
+        <Typography color="text.secondary" variant="body2">
+          Arrow functions were introduced in ES6.
+        </Typography>
+        <Typography color="text.secondary" variant="body2">
+          Arrow functions can be used in the same way as Function Expressions. For instance, to dynamically create a function:
+        </Typography>
+        <Highlight
+          theme={themes.shadesOfPurple}
+          code={arrowFunctionLikeExpressionExample}
+          language="tsx"
+        >
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre style={style}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+        <Typography gutterBottom variant="h5" component="div">
+          Multiline Functions
+        </Typography>
+        <Typography gutterBottom color="text.secondary" variant="body2">
+          Sometimes we need a more complex function, with multiple expressions and statements. In that case, we can enclose them in curly braces. The major difference is that curly braces require a return within them to return a value (just like a regular function does).
+        </Typography>
+        <Highlight
+          theme={themes.shadesOfPurple}
+          code={multilineArrowFunctionExample}
+          language="tsx"
+        >
+          {({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <pre style={style}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token })} />
+                  ))}
+                </div>
+              ))}
+            </pre>
+          )}
+        </Highlight>
+        <Typography gutterBottom variant="h5" component="div">
+          Differences with regular functions
+        </Typography>
+        <List
+            size="sm"
+            sx={(theme) => ({
+              // Gatsby colors
+              '--joy-palette-primary-plainColor': '#8a4baf',
+              '--joy-palette-neutral-plainHoverBg': 'transparent',
+              '--joy-palette-neutral-plainActiveBg': 'transparent',
+              '--joy-palette-primary-plainHoverBg': 'transparent',
+              '--joy-palette-primary-plainActiveBg': 'transparent',
+              [theme.getColorSchemeSelector('dark')]: {
+                '--joy-palette-text-secondary': '#635e69',
+                '--joy-palette-primary-plainColor': '#d48cff',
+              },
+              '--List-insetStart': '32px',
+              '--ListItem-paddingY': '0px', 
+              '--ListItem-paddingRight': '16px',
+              '--ListItem-paddingLeft': '21px',
+              '--ListItem-startActionWidth': '0px',
+              '--ListItem-startActionTranslateX': '-50%',
+              // [`& .${listItemButtonClasses.root}`]: {
+              //   borderLeft: '1px solid',
+              //   borderColor: 'divider',
+              // },
+              // [`& .${listItemButtonClasses.root}.${listItemButtonClasses.selected}`]: {
+              //   borderColor: 'currentColor',
+              // },
+              // [`& .${listItemClasses.nested} > .${listItemButtonClasses.root}`]: {
+              //   border: 'none',
+              // },
+              '& [class*="startAction"]': {
+                color: 'var(--joy-palette-text-tertiary)',
+              },
+            })}
+          >
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen7((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open7 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Arrow functions do not have this. If this is accessed, it is taken from the outside.
+                </Typography>
+              </ListItem>
+              {open7 && (
+                <Box>
+                  The arrow function does not create any binding. The function simply does not have this. The lookup of this is made exactly the same way as a regular variable search: in the outer lexical environment.
+                  This take the value of where it was called, the window global object or the object where it was called from.
+                </Box>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen8((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open8 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Arrow functions cannot be used as constructors
+                </Typography>
+              </ListItem>
+              {open8 && (
+                <>
+                <Box>
+                  Arrow functions cannot create their own this. For this reason, arrow functions also cannot be used as constructors.
+                  But, we can use arrow functions for the methods in the class without getting errors.
+                </Box>
+                <Highlight
+                  theme={themes.shadesOfPurple}
+                  code={arrowFunctionInClassExample}
+                  language="tsx"
+                >
+                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre style={style}>
+                      {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })}>
+                          {line.map((token, key) => (
+                            <span key={key} {...getTokenProps({ token })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
+                <Box>
+                Though sayName as an arrow function does not create its own this, remember that any reference to this would point to the value of it before the arrow function was created. In this case, the value of this pointed to Dog before sayName was created.
+                </Box>
+                </>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen9((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open9 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Arrow functions cannot be declared
+                </Typography>
+              </ListItem>
+              {open9 && (
+                <>
+                <Box>
+                Back to arrow functions. Normal functions can be declared when you use the function keyword and a name, but arrow functions cannot be declared. They can only be expressed because they are anonymous.
+                </Box>
+                <Highlight
+                  theme={themes.shadesOfPurple}
+                  code={arrowFunctionInVariableExample}
+                  language="tsx"
+                >
+                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre style={style}>
+                      {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })}>
+                          {line.map((token, key) => (
+                            <span key={key} {...getTokenProps({ token })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
+                <Box>
+                  As you see here, we have an anonymous function which is assigned to the printHello variable. printHello is not a declared function here. It is a variable that holds the evaluated value from the function expression.
+                </Box>
+                </>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen10((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open10 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                Arrow functions cannot be accessed before initialization
+                </Typography>
+              </ListItem>
+              {open10 && (
+                <>
+                <Box>
+                  Not all kinds of functions can be accessed before initialization. All functions and variables in JavaScript are hoisted, but only declared functions can be accessed before initialization.
+                </Box>
+                <Highlight
+                  theme={themes.shadesOfPurple}
+                  code={callFunctionBeforeInitializationExample}
+                  language="tsx"
+                >
+                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre style={style}>
+                      {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })}>
+                          {line.map((token, key) => (
+                            <span key={key} {...getTokenProps({ token })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
+                
+                </>
+              )}
+              <Box>
+                printName is not a declared function. It is a variable, declared with const which is assigned a function expression. Variables declared with let and const are hoisted, but they cannot be accessed before the line they are initialized.
+              </Box>
+            </ListItem>
+          </List>
+          <Box sx={{ mx: 2 }}>
+            <Typography variant="h6" component="div">
+            Sources
+            </Typography>
+            <ul>
+              <li>
+                <Typography color="text.secondary" variant="body2">
+                  https://www.w3schools.com/js/js_arrow_function.asp
+                </Typography>
+              </li>
+                <li>
+                <Typography color="text.secondary" variant="body2">
+                  https://javascript.info/arrow-functions-basics
+                </Typography>
+              </li>
+              <li>
+                <Typography color="text.secondary" variant="body2">
+                  https://www.freecodecamp.org/news/the-difference-between-arrow-functions-and-normal-functions/
+                </Typography>
+              </li>
+            </ul>
+          </Box>
+      </Box>
     </Box>
   );
 };
