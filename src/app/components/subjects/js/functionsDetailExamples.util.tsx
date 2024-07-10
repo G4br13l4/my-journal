@@ -96,4 +96,75 @@ export const callFunctionBeforeInitializationExample = `
   // ReferenceError Cannot access 'printName' before initialization
 `;
 
+export const functionAsValueExample = `
+  const sayHello = function() {
+    console.log('hello');
+  };
+
+  sayHello();
+`;
+
+export const functionAsArgumntExample = `
+  function callFunction(func) {
+    func();
+  };
+
+  callFunction(sayHello);
+`;
+
+export const returnFunctionExample = `
+  function createGreetingFunction(name) {
+    return function() {
+      console.log('Hello ' + name);
+    }
+  };
+
+  const sayHelloToJohn = createGreetingFunction('John');
+  sayHelloToJohn();
+`;
+
+export const functionExpressionExample = `
+  const sayHello = function() {
+    console.log('hello world!');
+  };
+
+  sayHello();
+`;
+
+export const hightOrderFunctionExample = `
+  const numbers = [34, 23, 56];
+
+  const doubled = numbers.map(function (number) {
+    return number * 2;
+  })
+
+  console.log(doubled);
+`;
+
+export const functionAsObjectPropertyExample = `
+  const person = {
+    name: 'John',
+    sayHello {
+      console.log('Hello my name is ' + this.name);
+    },
+  };
+
+  person.sayHello();
+`;
+
+export const functionAsClassMethodExample = `
+  class Person {
+    constructor(name) {
+      this.name = name;
+    }
+
+    sayHello() {
+      console.log('Hello my name is ' + this.name);
+    },
+  };
+
+  const person = new Person('David');
+  person.sayHello();
+`;
+
   

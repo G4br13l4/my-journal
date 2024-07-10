@@ -9,7 +9,26 @@ import ListItem from '@mui/joy/ListItem';
 import IconButton from '@mui/joy/IconButton';
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { Highlight, themes } from 'prism-react-renderer';
-import { arrowFunctionExample, functionAsArgumentExample, functionInVariableExample, functionWithArgumentExample, normalDeclarationExample, syntaxExample, arrowFunctionLikeExpressionExample, multilineArrowFunctionExample, arrowFunctionInClassExample, arrowFunctionInVariableExample, callFunctionBeforeInitializationExample } from './functionsDetailExamples.util';
+import { 
+  arrowFunctionExample, 
+  functionAsArgumentExample, 
+  functionInVariableExample, 
+  functionWithArgumentExample, 
+  normalDeclarationExample, 
+  syntaxExample, 
+  arrowFunctionLikeExpressionExample, 
+  multilineArrowFunctionExample, 
+  arrowFunctionInClassExample, 
+  arrowFunctionInVariableExample, 
+  callFunctionBeforeInitializationExample, 
+  functionAsValueExample, 
+  functionAsArgumntExample,
+  returnFunctionExample,
+  functionExpressionExample,
+  hightOrderFunctionExample,
+  functionAsObjectPropertyExample,
+  functionAsClassMethodExample
+} from './functionsDetailExamples.util';
 
 const FunctionsDetail: FunctionComponent = () => {
   const [open, setOpen] = React.useState(false);
@@ -22,6 +41,13 @@ const FunctionsDetail: FunctionComponent = () => {
   const [open8, setOpen8] = React.useState(false);
   const [open9, setOpen9] = React.useState(false);
   const [open10, setOpen10] = React.useState(false);
+  const [open11, setOpen11] = React.useState(false);
+  const [open12, setOpen12] = React.useState(false);
+  const [open13, setOpen13] = React.useState(false);
+  const [open14, setOpen14] = React.useState(false);
+  const [open15, setOpen15] = React.useState(false);
+  const [open16, setOpen16] = React.useState(false);
+
 
   return (
     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -51,8 +77,8 @@ const FunctionsDetail: FunctionComponent = () => {
         </Highlight>
       </Box>
       <Box sx={{ my: 3, mx: 2 }}>
-        <Typography gutterBottom variant="h6" component="div">
-        Usage
+        <Typography gutterBottom variant="h5" component="div">
+          Usage
         </Typography>
         <Box
         sx={{
@@ -318,7 +344,7 @@ const FunctionsDetail: FunctionComponent = () => {
         </Highlight>
       </Box>
       <Box sx={{ my: 3, mx: 2 }}>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom variant="h5" component="div">
           Usage
         </Typography>
         <Box
@@ -728,12 +754,11 @@ const FunctionsDetail: FunctionComponent = () => {
                     </pre>
                   )}
                 </Highlight>
-                
+                <Box>
+                  printName is not a declared function. It is a variable, declared with const which is assigned a function expression. Variables declared with let and const are hoisted, but they cannot be accessed before the line they are initialized.
+                </Box>
                 </>
               )}
-              <Box>
-                printName is not a declared function. It is a variable, declared with const which is assigned a function expression. Variables declared with let and const are hoisted, but they cannot be accessed before the line they are initialized.
-              </Box>
             </ListItem>
           </List>
           <Box sx={{ mx: 2 }}>
@@ -758,6 +783,359 @@ const FunctionsDetail: FunctionComponent = () => {
               </li>
             </ul>
           </Box>
+      </Box>
+      <Divider variant="middle" />
+      <Box sx={{ my: 4, mx: 2 }}>
+        <Typography gutterBottom variant="h4" component="div">
+          Functions as a value
+        </Typography>
+        <Typography gutterBottom color="text.secondary" variant="body2">
+          In JavaScript, functions are first-class citizens, which means that they can be treated like any other value in the language. This means that you can assign functions to variables, pass them as arguments to other functions, and return them from functions.
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+          Usage
+        </Typography>
+        <List
+          size="sm"
+          sx={(theme) => ({
+            // Gatsby colors
+            '--joy-palette-primary-plainColor': '#8a4baf',
+            '--joy-palette-neutral-plainHoverBg': 'transparent',
+            '--joy-palette-neutral-plainActiveBg': 'transparent',
+            '--joy-palette-primary-plainHoverBg': 'transparent',
+            '--joy-palette-primary-plainActiveBg': 'transparent',
+            [theme.getColorSchemeSelector('dark')]: {
+              '--joy-palette-text-secondary': '#635e69',
+              '--joy-palette-primary-plainColor': '#d48cff',
+            },
+            '--List-insetStart': '32px',
+            '--ListItem-paddingY': '0px', 
+            '--ListItem-paddingRight': '16px',
+            '--ListItem-paddingLeft': '21px',
+            '--ListItem-startActionWidth': '0px',
+            '--ListItem-startActionTranslateX': '-50%',
+            // [`& .${listItemButtonClasses.root}`]: {
+            //   borderLeft: '1px solid',
+            //   borderColor: 'divider',
+            // },
+            // [`& .${listItemButtonClasses.root}.${listItemButtonClasses.selected}`]: {
+            //   borderColor: 'currentColor',
+            // },
+            // [`& .${listItemClasses.nested} > .${listItemButtonClasses.root}`]: {
+            //   border: 'none',
+            // },
+            '& [class*="startAction"]': {
+              color: 'var(--joy-palette-text-tertiary)',
+            },
+          })}
+        >
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen11((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open11 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Assigning a function to a variable.
+                </Typography>
+              </ListItem>
+              {open11 && (
+                <>
+                  <Box>
+                    You can assign a function to a variable just like you would assign any other value:
+                  </Box>
+                  <Highlight
+                    theme={themes.shadesOfPurple}
+                    code={functionAsValueExample}
+                    language="tsx"
+                  >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                      <pre style={style}>
+                        {tokens.map((line, i) => (
+                          <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                </>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen12((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open12 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Passing a function as an argument to another function
+                </Typography>
+              </ListItem>
+              {open12 && (
+                <Highlight
+                  theme={themes.shadesOfPurple}
+                  code={functionAsArgumntExample}
+                  language="tsx"
+                >
+                  {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                    <pre style={style}>
+                      {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })}>
+                          {line.map((token, key) => (
+                            <span key={key} {...getTokenProps({ token })} />
+                          ))}
+                        </div>
+                      ))}
+                    </pre>
+                  )}
+                </Highlight>
+              )}
+            </ListItem> 
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen13((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open13 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Returning a function from a function
+                </Typography>
+              </ListItem>
+              {open13 && (
+                <>
+                  <Box>
+                    Just as with values, we can return functions. The idea around is that functions will eventually return a value. Inherently, you are simply returning the value that the function produced from its operation.
+                  </Box>
+                  <Highlight
+                    theme={themes.shadesOfPurple}
+                    code={returnFunctionExample}
+                    language="tsx"
+                  >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                      <pre style={style}>
+                        {tokens.map((line, i) => (
+                          <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                  <Box>
+                    The above makes use of an anonymous function. The anonymous function is returned in the creatGreetingFunction().
+                  </Box>
+                </>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen14((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open14 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Using function expressions
+                </Typography>
+              </ListItem>
+              {open14 && (
+                <>
+                  <Box>
+                    Function expressions are anonymous functions that are assigned to a variable.
+                  </Box>
+                  <Highlight
+                    theme={themes.shadesOfPurple}
+                    code={functionExpressionExample}
+                    language="tsx"
+                  >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                      <pre style={style}>
+                        {tokens.map((line, i) => (
+                          <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                  <Box>
+                    Function expressions are often used in conjunction with higher-order functions, which are functions that take other functions as arguments or return functions as output.
+                  </Box>
+                  <Highlight
+                    theme={themes.shadesOfPurple}
+                    code={hightOrderFunctionExample}
+                    language="tsx"
+                  >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                      <pre style={style}>
+                        {tokens.map((line, i) => (
+                          <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                </>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen15((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open15 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Using functions as object properties
+                </Typography>
+              </ListItem>
+              {open15 && (
+                <>
+                  <Box>
+                    Another example of using function as values is in the usage of functions as object properties. You can use functions as properties of objects in JavaScript.
+                  </Box>
+                  <Highlight
+                    theme={themes.shadesOfPurple}
+                    code={functionAsObjectPropertyExample}
+                    language="tsx"
+                  >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                      <pre style={style}>
+                        {tokens.map((line, i) => (
+                          <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                </>
+              )}
+            </ListItem>
+            <ListItem
+              nested
+              sx={{ my: 1 }}
+              startAction={
+                <IconButton
+                  variant="plain"
+                  size="sm"
+                  color="neutral"
+                  onClick={() => setOpen16((bool) => !bool)}
+                >
+                  <KeyboardArrowDown
+                    sx={{ transform: open16 ? 'initial' : 'rotate(-90deg)' }}
+                  />
+                </IconButton>
+              }
+            >
+              <ListItem>
+                <Typography gutterBottom variant="h6" component="div">
+                  Using functions as class methods
+                </Typography>
+              </ListItem>
+              {open16 && (
+                <>
+                  <Box>
+                    You can use functions as methods of classes in JavaScript. 
+                  </Box>
+                  <Highlight
+                    theme={themes.shadesOfPurple}
+                    code={functionAsClassMethodExample}
+                    language="tsx"
+                  >
+                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                      <pre style={style}>
+                        {tokens.map((line, i) => (
+                          <div key={i} {...getLineProps({ line })}>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
+                          </div>
+                        ))}
+                      </pre>
+                    )}
+                  </Highlight>
+                </>
+              )}
+            </ListItem>
+        </List>
+        <Box sx={{ mx: 2 }}>
+          <Typography variant="h6" component="div">
+          Sources
+          </Typography>
+          <ul>
+            <li>
+              <Typography color="text.secondary" variant="body2">
+                https://www.golinuxcloud.com/javascript-function-as-values/
+              </Typography>
+            </li>
+          </ul>
+        </Box>
       </Box>
     </Box>
   );
